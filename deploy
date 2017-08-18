@@ -1,0 +1,29 @@
+#!/bin/bash
+
+while [[ $# -gt 0 ]]
+do
+
+case "$1" in
+	local)
+	python run.py
+	shift
+	;;
+	serverstatus)
+	request_cmd="$(curl -i -o - --silent -X GET http://52.58.183.106:5000)"
+	echo "$request_cmd" |grep HTTP |awk '{print $2}'
+	shift
+	;;
+	test)
+	# TODO: run docker test_env
+	# TODO: ## get git sources
+	# TODO: ## run python
+	shift
+	;;
+	production)
+	;;
+	*)
+	echo 'please use local, serverstatus or production'
+	;;	
+esac
+shift
+done
