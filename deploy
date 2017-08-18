@@ -13,11 +13,9 @@ case "$1" in
 	echo "$request_cmd" |grep HTTP |awk '{print $2}'
 	shift
 	;;
-	test-start)
+	test)
 	docker exec keystone-test python run.py &
-	shift
-	;;
-	test-stop)
+	./deploy serverstatus
 	docker stop keystone-test
 	docker rm keystone-test
 	shift
