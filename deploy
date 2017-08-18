@@ -17,11 +17,8 @@ case "$1" in
 	docker exec keystone-test python run.py &
 	sleep 7
 	./deploy serverstatus
+	sleep 2
 	docker rm -f keystone-test
-	shift
-	;;
-	test-begin)
-	docker exec keystone-test python run.py &
 	shift
 	;;
 	production)
