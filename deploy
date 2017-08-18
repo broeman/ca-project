@@ -9,14 +9,17 @@ case "$1" in
 	shift
 	;;
 	serverstatus)
-	request_cmd="$(curl -i -o - --silent -X GET http://52.58.183.106:5000)"
+	request_cmd="$(curl -i -o - --silent -X GET http://localhost:5555)"
 	echo "$request_cmd" |grep HTTP |awk '{print $2}'
 	shift
 	;;
-	test)
-	# TODO: run docker test_env
-	# TODO: ## get git sources
-	# TODO: ## run python
+	test-start)
+	docker exec keystone-test python run.py &
+	shift
+	;;
+	test-stop)
+	docker stop keystone-test
+	docker rm keystone-test
 	shift
 	;;
 	production)
